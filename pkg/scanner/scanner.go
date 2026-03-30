@@ -205,6 +205,9 @@ func (s *Scanner) analyzeLine(job ScanLine, findings *[]Finding, fMu *sync.Mutex
 		for _, token := range tokens {
 			token = strings.TrimSpace(token)
 			if len(token) >= s.Config.Entropy.MinLength {
+				if s.isAssetNoise(token) {
+					continue
+				}
 				ent := calculateEntropy(token)
 				if ent >= s.Config.Entropy.Threshold {
 					key := "entropy|" + token + "|" + job.File
@@ -231,6 +234,36 @@ func (s *Scanner) analyzeLine(job ScanLine, findings *[]Finding, fMu *sync.Mutex
 			}
 		}
 	}
+}
+
+func (s *Scanner) isAssetNoise(token string) bool {
+	// Filter out common high-entropy non-secrets (Images, SVGs, Fonts in Base64)
+	noisePrefixes := []string{
+		"iVBORw0KGgo", // PNG
+		"UklGR",       // WebP
+		"PHN2Z",       // SVG starts with <svg
+		"d09GR",       // Fonts
+		"M1M4",        // Some binary blobs
+		"R0lG",        // GIF
+		"data:image",  // Inline data
+		"M 0 0 L",     // Common SVG path start tokens if split by spaces
+		"M0 0l",       // Common SVG path
+	}
+	for _, p := range noisePrefixes {
+		if strings.HasPrefix(token, p) {
+			return true
+		}
+	}
+
+	// Filter out extremely long strings that look like CSS path data (M followed by coordinates)
+	if len(token) > 100 && (strings.HasPrefix(token, "M") || strings.Contains(token, "L")) {
+		pathMatch, _ := regexp.MatchString(`^M\d+[ ,]\d+`, token)
+		if pathMatch {
+			return true
+		}
+	}
+
+	return false
 }
 
 func (s *Scanner) isExcluded(path string) bool {
