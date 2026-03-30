@@ -1,0 +1,75 @@
+# VaultGuard Scoping Rules
+# This YAML file defines the patterns and logic for secret detection.
+
+rules:
+  - id: aws-access-key
+    description: "AWS Access Key ID"
+    regex: "(?i)AKIA[0-9A-Z]{16}"
+    severity: "CRITICAL"
+    tags: ["aws", "cloud", "access-key"]
+
+  - id: aws-secret-key
+    description: "AWS Secret Access Key"
+    regex: "(?i)aws_secret_access_key\\s*[:=]\\s*['\"]([0-9a-zA-Z/+=]{40})['\"]"
+    severity: "CRITICAL"
+    tags: ["aws", "cloud", "secret-key"]
+
+  - id: generic-api-key
+    description: "Generic API Key"
+    regex: "(?i)(?:key|token|api|secret|pass|auth)[_-]?(?:key|token|api|secret|pass|auth)?\\s*[:=]\\s*['\"]([0-9a-zA-Z]{16,64})['\"]"
+    severity: "HIGH"
+    tags: ["generic", "key", "token"]
+
+  - id: github-token
+    description: "GitHub Personal Access Token"
+    regex: "(?i)gh[p_o_u_s]_[a-zA-Z0-9]{36}"
+    severity: "CRITICAL"
+    tags: ["github", "token"]
+
+  - id: email-address
+    description: "Email Address (Potential PII)"
+    regex: "\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}\\b"
+    severity: "LOW"
+    tags: ["pii", "email"]
+
+  - id: private-key
+    description: "Private Key"
+    regex: "---BEGIN (?:RSA|OPENSSH|DSA|EC|PGP) PRIVATE KEY---"
+    severity: "CRITICAL"
+    tags: ["key", "ssh", "pgp"]
+
+entropy:
+  enabled: true
+  threshold: 4.5 # Ssh keys, hashes usually have high entropy.
+  min_length: 20
+
+exclude_paths:
+  - ".git/"
+  - "node_modules/"
+  - "vendor/"
+  - "dist/"
+  - "bin/"
+  - "obj/"
+  - "out/"
+  - "build/"
+  - "target/"
+  - "*.exe"
+  - "*.dll"
+  - "*.so"
+  - "*.a"
+  - "*.lib"
+  - "*.o"
+  - "*.pyc"
+  - "__pycache__/"
+  - ".idea/"
+  - ".vscode/"
+  - ".next/"
+  - ".nuxt/"
+  - ".cache/"
+  - "*.log"
+  - "package-lock.json"
+  - "yarn.lock"
+  - "pnpm-lock.yaml"
+  - "composer.lock"
+  - "go.sum"
+  - ".DS_Store"

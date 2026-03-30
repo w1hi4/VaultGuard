@@ -1,0 +1,20 @@
+﻿[
+  {
+    "rule_id": "email-address",
+    "description": "Email Address (Potential PII)",
+    "commit": "f612ffff6947af0a6f3ed2e6f134d0e4e5597b3f",
+    "file": "gittyleaks/gittyleaks.py",
+    "line_number": 3,
+    "match": "git@github.com",
+    "severity": "LOW"
+  },
+  {
+    "rule_id": "email-address",
+    "description": "Email Address (Potential PII)",
+    "commit": "e42298ca0f67170f91d1cdf92bdcb3e1983ce7c2",
+    "file": "setup.py",
+    "line_number": 13,
+    "match": "kootenpv@gmail.com",
+    "severity": "LOW"
+  }
+]

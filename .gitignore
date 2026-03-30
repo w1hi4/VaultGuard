@@ -1,0 +1,46 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+bin/
+vaultguard.exe
+
+# Dependency directories
+node_modules/
+**/node_modules/
+vendor/
+**/vendor/
+
+# Build and Output
+dist/
+build/
+target/
+out/
+.next/
+.nuxt/
+.cache/
+
+# Test data and Coverage
+*.test
+*.out
+coverage/
+
+# OS Specific
+.DS_Store
+Thumbs.db
+
+# Logs and Caches
+*.log
+.npm/
+.yarn/
+.pnpm-debug.log*
+
+# Project specifics
+web/favicon.png # The user wants the logo shared, keeping it.
+tmp/
+
+# Sensitive local configs
+pkg/scanner/rules.yaml.local
+.env*

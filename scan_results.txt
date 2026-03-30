@@ -1,0 +1,7 @@
+﻿Scanning repository: f:\DECOPILED APK\gittyleaks_scan
+Found 1 potential leaks!
+[email-address] Email Address (Potential PII)
+  File: setup.py:13
+  Commit: e42298ca0f67170f91d1cdf92bdcb3e1983ce7c2
+  Match: kootenpv@gmail.com
+--------------------------------------------------
