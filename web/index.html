@@ -216,9 +216,12 @@
             display: grid; grid-template-columns: 2fr 1fr; gap: 1rem; margin-top: 1rem;
             padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.05);
         }
-        .meta-block { display: flex; flex-direction: column; gap: 0.25rem; }
+        .meta-block { display: flex; flex-direction: column; gap: 0.25rem; min-width: 0; }
         .meta-label { font-size: 0.6rem; text-transform: uppercase; color: var(--text-dim); }
-        .meta-value { font-family: 'JetBrains Mono'; font-size: 0.8rem; color: var(--primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .meta-value { 
+            font-family: 'JetBrains Mono'; font-size: 0.8rem; color: var(--primary); 
+            word-break: break-all; overflow-wrap: anywhere; line-height: 1.4;
+        }
 
         .empty-nexus { padding: 8rem 0; text-align: center; opacity: 0.4; }
         .empty-icon { font-size: 3rem; margin-bottom: 1rem; }
