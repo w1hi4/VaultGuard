@@ -1,58 +1,86 @@
-# 🛡️ VaultGuard: Advanced Secret & PII Scanner
+# 🛡️ VaultGuard Nexus v3.1.0
+### Advanced, Multi-Threaded Secret & PII Scanner
 
-**VaultGuard** is a high-performance, local-first security tool designed to detect hardcoded secrets, API keys, and PII (Personally Identifiable Information) across your entire Git history.
+**VaultGuard Nexus** is an enterprise-grade, high-performance security auditing suite designed for the modern developer. It provides a "Zero-Configuration" experience for detecting hardcoded secrets, API keys, and sensitive PII across local and remote Git repositories.
 
-![VaultGuard Dashboard Screenshot](https://via.placeholder.com/1200x600/1e293b/ffffff?text=VaultGuard+Premium+Dashboard)
+---
 
-## ✨ Features
+## ⚡ Core Features
 
-- **🚀 Blistering Speed**: Built in Go for rapid analysis of even the largest repositories.
-- **🔍 Deep History Scanning**: Automatically analyzes the full commit chain, uncovering secrets buried years ago.
-- **🌐 Remote Git Support**: Paste any Git URL (GitHub/GitLab/etc.) to automatically clone and scan.
-- **💎 Premium UI**: A modern, glassmorphic dashboard with real-time feedback and server-side analysis.
-- **📊 Professional Reporting**: One-click generation of detailed Markdown audit reports for compliance and security.
-- **🛠️ Extensible Rules**: Add your own detection patterns via a simple `rules.yaml` file.
+- **🚀 Ultra-Scale Parallelism**: Leveraging a high-performance Go-based Worker Pool (8-16 workers) for blistering audit speeds on massive repositories.
+- **🔍 Deep-History Intelligence**: Automatically traverses 100% of the commit history, unearthing secrets from deleted branches or historical commits.
+- **💎 Nexus Defense UI**: A premium, WebGL-inspired dashboard providing real-time visual feedback and a "Digital Cascade" result reveal.
+- **🌐 One-Click Remote Audits**: Simply paste any GitHub/GitLab URL. VaultGuard handles the cloning, analysis, and cleanup automatically.
+- **🛡️ Intelligent Noise Reduction**: Automated path exclusion logic skips `node_modules`, `vendor`, `build`, and lock files for maximum performance.
+- **📊 Professional Security Reporting**: Generates detailed, auditor-ready Markdown reports with one click from the dashboard.
 
-## 🚀 Quick Start (Local)
+---
 
-### Prerequisites
-- [Go 1.21+](https://go.dev/dl/) installed.
-- [Git](https://git-scm.com/downloads) installed.
+## 🚀 Getting Started
 
-### Installation
-```bash
+### 📋 Prerequisites
+- **Git**: [Download Git](https://git-scm.com/downloads) (Required for remote cloning)
+- **Go 1.21+**: [Download Go](https://go.dev/dl/) (Required for building from source)
+
+### 🛠️ Installation
+```powershell
 # Clone the repository
-git clone https://github.com/yourusername/vaultguard.git
-cd vaultguard
+git clone https://github.com/w1hi4/VaultGuard.git
+cd VaultGuard
 
-# Build the engine
+# Build the high-performance binary
 go build -o vaultguard.exe cmd/vaultguard/main.go
 ```
 
-### Running the Dashboard
-The easiest way to start is using the provided launcher:
+### 🔓 Quick Launch
+The quickest way to start the **Nexus Dashboard** is via the provided batch script:
 - **Windows**: Double-click `start.bat`
 - **Linux/macOS**: `go run cmd/vaultguard/main.go serve -c pkg/scanner/rules.yaml`
 
-Then open `http://localhost:8080` in your browser.
+---
 
-## 💻 CLI Usage
-
-Scan a local project or remote repository directly from the terminal:
-
-```bash
-# Scan a local folder
-./vaultguard.exe scan -p "C:/projects/myapp"
-
-# Deep scan a remote GitHub repository
-./vaultguard.exe scan -p "https://github.com/user/repo.git" --deep
-
-# Export results as JSON
-./vaultguard.exe scan -p "https://github.com/user/repo.git" --json > audit.json
-```
-
-## 🛡️ License
-Distributed under the **MIT License**. See `LICENSE` for more information.
+## 🎨 Web Dashboard Guide
+1. **Launch**: Start the server and navigate to `http://localhost:8080`.
+2. **Audit**: Paste a **GitHub URL** or a **Local Directory Path** into the central "Nexus Link" field.
+3. **Execute**: Click **AUDIT**. The system will immediately begin a deep, parallelized scan.
+4. **Reveal**: Findings are presented in the "Digital Cascade" view, categorized by severity (CRITICAL, HIGH, MEDIUM, LOW).
+5. **Report**: Click **Generate Report** to save a detailed security audit in Markdown format.
 
 ---
-*Created by [Your Name/Handle] - Protecting your code, one commit at a time.*
+
+## 💻 CLI Master Guide
+For power users and CI/CD integration, use the `vaultguard.exe` CLI.
+
+| Command | Flag | Description | Example |
+| :--- | :--- | :--- | :--- |
+| **`scan`** | `-p`, `--path` | Target repository/path | `scan -p "https://github.com/user/repo"` |
+| | `-e`, `--exclude` | Custom path patterns to skip | `scan -p "." -e "*.log,tmp/"` |
+| | `--deep` | (Default: true) Deep scan history | `scan -p "." --deep=true` |
+| | `--json` | Output findings in raw JSON | `scan -p "." --json > results.json` |
+| **`serve`** | `-p`, `--port` | Web dashboard port | `serve --port 9090` |
+| | `-c`, `--config` | Path to `rules.yaml` | `serve -c "pkg/scanner/rules.yaml"` |
+
+---
+
+## ⚙️ Customizing Detection Rules
+Modify `pkg/scanner/rules.yaml` to add custom patterns or expand exclusions.
+
+```yaml
+rules:
+  - id: my-custom-api-key
+    description: "Detects internal secret headers"
+    regex: "(?i)X-SECRET-KEY\\s*[:=]\\s*['\"]([0-9a-zA-Z]{32})['\"]"
+    severity: "CRITICAL"
+
+exclude_paths:
+  - "node_modules/"
+  - "dist/"
+  - "*.log"
+```
+
+---
+
+## 🛡️ License & Community
+Distributed under the **MIT License**. Join the defense and help make the web more secure.
+
+*Created by [w4hid] - Protecting your code, one commit at a time.*
