@@ -4,10 +4,10 @@ Found 2 potential leaks!
 [LOW] [email-address] Email Address (Potential PII)
   File: gittyleaks/gittyleaks.py:3
   Commit: f612ffff6947af0a6f3ed2e6f134d0e4e5597b3f
-  Match: git@github.com
+  Match: 
 --------------------------------------------------
 [LOW] [email-address] Email Address (Potential PII)
   File: setup.py:13
   Commit: e42298ca0f67170f91d1cdf92bdcb3e1983ce7c2
-  Match: kootenpv@gmail.com
+  Match: 
 --------------------------------------------------
