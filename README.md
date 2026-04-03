@@ -5,7 +5,7 @@
 
 ---
 
-## ⚡ Core Features
+## ⚡Core Features
 
 - **🚀 Ultra-Scale Parallelism**: Leveraging a high-performance Go-based Worker Pool (8-16 workers) for blistering audit speeds on massive repositories.
 - **🔍 Deep-History Intelligence**: Automatically traverses 100% of the commit history, unearthing secrets from deleted branches or historical commits.
