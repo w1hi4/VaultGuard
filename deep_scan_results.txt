@@ -1,7 +1,7 @@
 ﻿Scanning repository: f:\DECOPILED APK\gittyleaks_scan
 Mode: DEEP SCAN (full history)
 Found 2 potential leaks!
-[LOW] [email-address] Email Address (Potential PII)
+[LOW] [Email-address] Email Address (Potential PII)
   File: gittyleaks/gittyleaks.py:3
   Commit: f612ffff6947af0a6f3ed2e6f134d0e4e5597b3f
   Match: 
